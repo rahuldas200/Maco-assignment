@@ -13,7 +13,7 @@ const data = [
 
 
 export default function Header() {
-    const [selectedItem, setSelectedItem] = useState();
+    const [selectedItem, setSelectedItem] = useState(1);
     const handleCLick = (id) => {
         console.log(id);
         setSelectedItem(id);
@@ -44,7 +44,7 @@ export default function Header() {
                     <div
                         onClick={() => handleCLick(item.id)}
                         key={item.id}
-                        className={`text-base p-1 font-semibold ${selectedItem === item.id ? 'border-b-2 border-blue-500' : ''}`}>
+                        className={`text-base p-1 px-2 font-semibold ${selectedItem === item.id ? 'border-b-2 border-blue-500' : ''}`}>
                         {item.name}
                     </div>
                 ))}
