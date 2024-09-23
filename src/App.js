@@ -5,6 +5,8 @@ import Home from './pages/Home'
 import Profile from './pages/Profile';
 import Reports from './pages/Reports';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
   return (
