@@ -4,31 +4,43 @@ import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 
 const DashboardLayout = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // Sidebar starts open
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // Sidebar starts collapsed
 
   const handleMouseEnter = () => {
-    setIsSidebarOpen(true);
+    if (!isSidebarOpen) setIsSidebarOpen(true); // Expand sidebar on hover
   };
 
   const handleMouseLeave = () => {
-    setIsSidebarOpen(false);
+    if (isSidebarOpen) setIsSidebarOpen(false); // Collapse sidebar when not hovered
   };
 
   return (
     <div className="flex h-screen w-full">
+      {/* Sidebar - Fixed and scrollable */}
       <div
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className={`transition-all duration-300 bg-white ${isSidebarOpen ? 'w-56' : 'w-16'} border-r-2 border-black`}
+        className={`fixed transition-all duration-300 bg-white h-screen ${isSidebarOpen ? 'w-56' : 'w-18'
+          } border-gray-300 overflow-y-auto`}
       >
-        <Sidebar isSidebarOpen={isSidebarOpen} /> {/* Pass isSidebarOpen to Sidebar */}
+        <Sidebar isSidebarOpen={isSidebarOpen} />
       </div>
-      <div className="flex flex-col flex-1">
-        <Header />
-        <main className="flex-1 p-6 pr-14">
+
+
+
+
+      {/* Space for Sidebar in Main Content */}
+      <div className={`w-${isSidebarOpen ? '56' : '16'} flex-shrink-0`} />
+
+      {/* Main Content Section */}
+      <main className="flex flex-col w-full">
+        <div className=" bg-white sticky top-0 right-0 ">
+          <Header />
+        </div>
+        <div className='border-none'>
           <Outlet />
-        </main>
-      </div>
+        </div>
+      </main>
     </div>
   );
 };
